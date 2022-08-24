@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <AssemblyName>CSFTools.PackageReader.Core</AssemblyName>
+    <RootNamespace>CSFTools.PackageReader</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\System.IO.Extensions\System.IO.Extensions.csproj" />
+  </ItemGroup>
+
+</Project>
