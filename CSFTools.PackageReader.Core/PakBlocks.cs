@@ -17,21 +17,23 @@ namespace CSFTools.PackageReader
 
 	internal struct PakEntry
 	{
-		public string Name;
+		public string Filename;
 		public int CompressedDataStart;
 		public int CompressedSize;
-		public int Unknown1;
-		public int Unknown2;
+		public long Unknown;
 
-		public static bool TryReadBlock(BinaryReader reader, out PakEntry entry)
+		public static bool TryReadBlock(BinaryReader reader, PakGameVersion version, out PakEntry entry)
 		{
 			entry = default;
 
-			entry.Name = reader.ReadNullTerminatedString();
+			entry.Filename = reader.ReadNullTerminatedString();
 			entry.CompressedDataStart = reader.ReadInt32();
 			entry.CompressedSize = reader.ReadInt32();
-			entry.Unknown1 = reader.ReadInt32();
-			entry.Unknown2 = reader.ReadInt32();
+			entry.Unknown = reader.ReadInt64();
+
+			// apply relative offset of entry data block
+			if (version >= PakGameVersion.Demo)
+				entry.CompressedDataStart -= 13;
 
 			return true;
 		}
